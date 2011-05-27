@@ -10,6 +10,9 @@ the following settings:
     FACEBOOK_API_KEY = ''
     FACEBOOK_SECRET_KEY = ''
 
+    # If you have a user model proxy, set it like so:
+    FACEBOOK_USER_MODEL = 'my.app.and.model'
+
     # Optionally set default permissions to request, e.g: ['email', 'user_about_me']
     FACEBOOK_PERMS = []
     
