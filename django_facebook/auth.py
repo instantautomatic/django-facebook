@@ -19,7 +19,7 @@ class FacebookBackend(ModelBackend):
     def authenticate(self, fb_uid=None, fb_graphtoken=None):
         """ If we receive a facebook uid then the cookie has already been validated. """
         if fb_uid:
-            user, created = UserModule.objects.get_or_create(username=fb_uid)
+            user, created = UserModel.objects.get_or_create(username=fb_uid)
             return user
         return None
 
