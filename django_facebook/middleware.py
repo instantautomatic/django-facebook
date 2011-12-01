@@ -127,9 +127,13 @@ class FacebookMiddleware(object):
         request.facebook = DjangoFacebook(fb_user) if fb_user else None
 
         if fb_user and request.user.is_anonymous():
-            user = auth.authenticate(fb_uid=fb_user['uid'], fb_graphtoken=fb_user['access_token'])
-            if user:
-                user.last_login = datetime.datetime.now()
-                user.save()
-                request.user = user
+            try:
+                user = auth.authenticate(fb_uid=fb_user['uid'], fb_graphtoken=fb_user['access_token'])
+                if user:
+                    user.last_login = datetime.datetime.now()
+                    user.save()
+                    request.user = user
+            except facebook.GraphAPIError:
+                # Something went wrong, let's assume we can't "login".
+                pass
         return None
